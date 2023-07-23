@@ -2,10 +2,10 @@ package org.example.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.client.fraud.FraudClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -19,16 +19,11 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private final FraudClient fraudClient;
 
     public void addCustormer(int id, String name, String mail) {
 
-      Boolean isfraudster = restTemplate.getForObject(
-              "http://FRAUD/isfraudster?mail="+mail,
-              Boolean.class
-      );
-
-      if (Boolean.TRUE.equals(isfraudster)) {
+      if (Boolean.TRUE.equals(fraudClient.isFraudster(mail))) {
           throw  new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Customer is a Fraudster");
       }
 

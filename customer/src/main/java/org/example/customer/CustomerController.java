@@ -14,7 +14,7 @@ public class CustomerController {
     @Autowired
     private final CustomerService customerService;
 
-    @PostMapping("/customer")
+    @PostMapping("customer")
     public ResponseEntity<?> newCustomer (@RequestParam String mail,@RequestParam String name)
     {
         customerService.addCustormer(2,name, mail);

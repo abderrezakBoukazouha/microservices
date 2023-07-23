@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("fraud")
+@RestController("api/v1/fraud-check")
 @AllArgsConstructor
 public class fraudController {
     private final FraudService fraudService;
