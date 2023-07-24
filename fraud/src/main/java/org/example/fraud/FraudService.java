@@ -20,4 +20,8 @@ public class FraudService {
        return fraudRepository.findAll().stream().anyMatch(fraud -> fraud.getMail().equals(mail));
 
     }
+
+    public List<Fraud> getFraudsters() {
+        return fraudRepository.findAll();
+    }
 }

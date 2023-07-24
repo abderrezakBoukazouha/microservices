@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/fraud-check")
-public class fraudController {
+public class FraudController {
     private final FraudService fraudService;
 
     @GetMapping("fraudsters")
@@ -20,5 +22,10 @@ public class fraudController {
     @GetMapping("isfraudster")
     public boolean isFraudster(@RequestParam String mail) {
         return fraudService.checkPresence(mail);
+    }
+
+    @GetMapping
+    public List<Fraud> getFraudsters() {
+        return fraudService.getFraudsters();
     }
 }
